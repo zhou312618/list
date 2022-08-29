@@ -55,7 +55,6 @@
 
 <script>
 import axios from 'axios'
-
 // import axios from 'axios'
 export default {
   name: 'list',
@@ -95,7 +94,7 @@ export default {
 <style scoped>
 .list {
   font-size: 0.16rem;
-  width: 3.75rem;
+  /* width: 3.75rem; */
   /* height: 500px; */
   /* background: pink; */
   overflow: hidden;
@@ -205,6 +204,11 @@ export default {
 }
 .name {
   font-size: 0.12rem;
+  width: 187px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .price {
   font-size: 0.16rem;

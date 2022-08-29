@@ -5,6 +5,11 @@ import Home from '../views/Home.vue'
 Vue.use(VueRouter)
 const routes = [
   {
+    path: '/list1',
+    name: 'List1',
+    component: ()=>import('@/components/list1')
+  },
+  {
     // path: '/:tag?',
     path: '/',
     name: 'Home',
