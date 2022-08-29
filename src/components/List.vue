@@ -16,10 +16,22 @@
       </ul>
     </div>
     <div class="butt">
-      <div class="butt1" @click="huoqu('all')">全部</div>
-      <div class="butt2" @click="huoqu('style')">款式新</div>
-      <div class="butt2" @click="huoqu('sell')">销量高</div>
-      <div class="butt2" @click="huoqu('rate')">好评多</div>
+      <div
+        :class="vvvb == 'all' ? 'butt1' : ''"
+        @click="huoqu('all')"
+        style="width: 0.44rem"
+      >
+        全部
+      </div>
+      <div :class="vvvb == 'style' ? 'butt1' : ''" @click="huoqu('style')">
+        款式新
+      </div>
+      <div :class="vvvb == 'sell' ? 'butt1' : ''" @click="huoqu('sell')">
+        销量高
+      </div>
+      <div :class="vvvb == 'rate' ? 'butt1' : ''" @click="huoqu('rate')">
+        好评多
+      </div>
     </div>
 
     <div class="list111">
@@ -53,18 +65,16 @@ export default {
       dian: {},
       toplist: [],
       productlist: [],
+      vvvb: 'all',
     }
   },
   created() {
-    axios.get('https://dahua0822-api.herokuapp.com/goods').then((res) => {
-      this.toplist = res.data.data.top
-      this.productlist = res.data.data.data
-      console.log(res)
-      console.log(this.productlist)
-    })
+    this.huoqu('all')
   },
   methods: {
     huoqu(aa) {
+      this.vvvb = aa
+      console.log(this.vvvb)
       axios
         .get('https://dahua0822-api.herokuapp.com/goods', {
           params: {
@@ -72,9 +82,10 @@ export default {
           },
         })
         .then((res) => {
+          this.toplist = res.data.data.top
           this.productlist = res.data.data.data
-          console.log(res)
-          console.log(this.productlist)
+          // console.log(res)
+          // console.log(this.productlist)
         })
     },
   },
@@ -143,29 +154,7 @@ export default {
   white-space: nowrap;
   overflow-x: auto;
 }
-.butt::-webkit-scrollbar {
-  display: none;
-}
-.butt1 {
-  width: 0.44rem;
-  height: 0.44rem;
-
-  border-radius: 0.14rem;
-  text-align: center;
-  line-height: 0.44rem;
-  font-size: 14px;
-  font-weight: 700;
-  display: inline-block;
-  margin-right: 40px;
-  overflow: -moz-scrollbars-none;
-  -ms-overflow-style: none;
-  background: rgba(255, 223, 117, 1);
-}
-
-.butt1::-webkit-scrollbar {
-  width: 0 !important;
-}
-.butt2 {
+.butt div {
   width: 0.99rem;
   height: 0.44rem;
   background: rgba(255, 255, 255, 1);
@@ -177,6 +166,17 @@ export default {
   display: inline-block;
   margin-right: 40px;
 }
+.butt::-webkit-scrollbar {
+  display: none;
+}
+.butt1 {
+  background: rgba(255, 223, 117, 1) !important;
+}
+
+.butt1::-webkit-scrollbar {
+  width: 0 !important;
+}
+
 .list111 {
   width: 3.27rem;
   /* height: 1.68rem; */
